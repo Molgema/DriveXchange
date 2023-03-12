@@ -37,39 +37,31 @@
 #include <system.h>
 
 /* configure the pins and initialize the registers */
-void USART_2_initialization(void)
+void USART_3_initialization(void)
 {
 
 	// Set pin direction to input
-	PF5_set_dir(PORT_DIR_IN);
+	PB1_set_dir(PORT_DIR_IN);
 
-	PF5_set_pull_mode(
+	PB1_set_pull_mode(
 	    // <y> Pull configuration
 	    // <id> pad_pull_config
 	    // <PORT_PULL_OFF"> Off
 	    // <PORT_PULL_UP"> Pull-up
 	    PORT_PULL_OFF);
 
-	/* set the alternate pin mux */
-
-	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
-
 	// Set pin direction to output
 
-	PF4_set_level(
+	PB0_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
 	    // <false"> Low
 	    // <true"> High
 	    false);
 
-	PF4_set_dir(PORT_DIR_OUT);
+	PB0_set_dir(PORT_DIR_OUT);
 
-	/* set the alternate pin mux */
-
-	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
-
-	USART_2_init();
+	USART_3_init();
 }
 
 /**
@@ -81,7 +73,7 @@ void system_init()
 
 	CLKCTRL_init();
 
-	USART_2_initialization();
+	USART_3_initialization();
 
 	SLPCTRL_init();
 

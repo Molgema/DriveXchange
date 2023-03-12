@@ -48,12 +48,12 @@
  * \retval 0 the USART init was successful
  * \retval 1 the USART init was not successful
  */
-int8_t USART_2_init()
+int8_t USART_3_init()
 {
 
-	USART2.BAUD = (uint16_t)USART2_BAUD_RATE(9600); /* set baud rate register */
+	USART3.BAUD = (uint16_t)USART3_BAUD_RATE(9600); /* set baud rate register */
 
-	// USART2.CTRLA = 0 << USART_ABEIE_bp /* Auto-baud Error Interrupt Enable: disabled */
+	// USART3.CTRLA = 0 << USART_ABEIE_bp /* Auto-baud Error Interrupt Enable: disabled */
 	//		 | 0 << USART_DREIE_bp /* Data Register Empty Interrupt Enable: disabled */
 	//		 | 0 << USART_LBME_bp /* Loop-back Mode Enable: disabled */
 	//		 | USART_RS485_DISABLE_gc /* RS485 Mode disabled */
@@ -61,85 +61,85 @@ int8_t USART_2_init()
 	//		 | 0 << USART_RXSIE_bp /* Receiver Start Frame Interrupt Enable: disabled */
 	//		 | 0 << USART_TXCIE_bp; /* Transmit Complete Interrupt Enable: disabled */
 
-	USART2.CTRLB = 0 << USART_MPCM_bp       /* Multi-processor Communication Mode: disabled */
+	USART3.CTRLB = 0 << USART_MPCM_bp       /* Multi-processor Communication Mode: disabled */
 	               | 0 << USART_ODME_bp     /* Open Drain Mode Enable: disabled */
 	               | 1 << USART_RXEN_bp     /* Receiver Enable: enabled */
 	               | USART_RXMODE_NORMAL_gc /* Normal mode */
 	               | 0 << USART_SFDEN_bp    /* Start Frame Detection Enable: disabled */
 	               | 1 << USART_TXEN_bp;    /* Transmitter Enable: enabled */
 
-	// USART2.CTRLC = USART_CMODE_ASYNCHRONOUS_gc /* Asynchronous Mode */
+	// USART3.CTRLC = USART_CMODE_ASYNCHRONOUS_gc /* Asynchronous Mode */
 	//		 | USART_CHSIZE_8BIT_gc /* Character size: 8 bit */
 	//		 | USART_PMODE_DISABLED_gc /* No Parity */
 	//		 | USART_SBMODE_1BIT_gc; /* 1 stop bit */
 
-	// USART2.DBGCTRL = 0 << USART_DBGRUN_bp; /* Debug Run: disabled */
+	// USART3.DBGCTRL = 0 << USART_DBGRUN_bp; /* Debug Run: disabled */
 
-	// USART2.EVCTRL = 0 << USART_IREI_bp; /* IrDA Event Input Enable: disabled */
+	// USART3.EVCTRL = 0 << USART_IREI_bp; /* IrDA Event Input Enable: disabled */
 
-	// USART2.RXPLCTRL = 0x0 << USART_RXPL_gp; /* Receiver Pulse Length: 0x0 */
+	// USART3.RXPLCTRL = 0x0 << USART_RXPL_gp; /* Receiver Pulse Length: 0x0 */
 
-	// USART2.TXPLCTRL = 0x0 << USART_TXPL_gp; /* Transmit pulse length: 0x0 */
+	// USART3.TXPLCTRL = 0x0 << USART_TXPL_gp; /* Transmit pulse length: 0x0 */
 
 	return 0;
 }
 
 /**
- * \brief Enable RX and TX in USART_2
+ * \brief Enable RX and TX in USART_3
  * 1. If supported by the clock system, enables the clock to the USART
  * 2. Enables the USART module by setting the RX and TX enable-bits in the USART control register
  *
  * \return Nothing
  */
-void USART_2_enable()
+void USART_3_enable()
 {
-	USART2.CTRLB |= USART_RXEN_bm | USART_TXEN_bm;
+	USART3.CTRLB |= USART_RXEN_bm | USART_TXEN_bm;
 }
 
 /**
- * \brief Enable RX in USART_2
+ * \brief Enable RX in USART_3
  * 1. If supported by the clock system, enables the clock to the USART
  * 2. Enables the USART module by setting the RX enable-bit in the USART control register
  *
  * \return Nothing
  */
-void USART_2_enable_rx()
+void USART_3_enable_rx()
 {
-	USART2.CTRLB |= USART_RXEN_bm;
+	USART3.CTRLB |= USART_RXEN_bm;
 }
 
 /**
- * \brief Enable TX in USART_2
+ * \brief Enable TX in USART_3
  * 1. If supported by the clock system, enables the clock to the USART
  * 2. Enables the USART module by setting the TX enable-bit in the USART control register
  *
  * \return Nothing
  */
-void USART_2_enable_tx()
+void USART_3_enable_tx()
 {
-	USART2.CTRLB |= USART_TXEN_bm;
+	USART3.CTRLB |= USART_TXEN_bm;
 }
 
 /**
- * \brief Disable USART_2
+ * \brief Disable USART_3
  * 1. Disables the USART module by clearing the enable-bit(s) in the USART control register
  * 2. If supported by the clock system, disables the clock to the USART
  *
  * \return Nothing
  */
-void USART_2_disable()
+void USART_3_disable()
 {
-	USART2.CTRLB &= ~(USART_RXEN_bm | USART_TXEN_bm);
+	USART3.CTRLB &= ~(USART_RXEN_bm | USART_TXEN_bm);
 }
 
 /**
- * \brief Get recieved data from USART_2
+ * \brief Get recieved data from USART_3
  *
- * \return Data register from USART_2 module
+ * \return Data register from USART_3 module
  */
-uint8_t USART_2_get_data()
+uint8_t USART_3_get_data()
 {
-	return USART2.RXDATAL;
+	return USART3.RXDATAL;
 }
 
 /**
@@ -149,9 +149,9 @@ uint8_t USART_2_get_data()
  * \retval false The USART can not receive data to be transmitted
  * \retval true The USART can receive data to be transmitted
  */
-bool USART_2_is_tx_ready()
+bool USART_3_is_tx_ready()
 {
-	return (USART2.STATUS & USART_DREIF_bm);
+	return (USART3.STATUS & USART_DREIF_bm);
 }
 
 /**
@@ -161,39 +161,39 @@ bool USART_2_is_tx_ready()
  * \retval true The USART has received data
  * \retval false The USART has not received data
  */
-bool USART_2_is_rx_ready()
+bool USART_3_is_rx_ready()
 {
-	return (USART2.STATUS & USART_RXCIF_bm);
+	return (USART3.STATUS & USART_RXCIF_bm);
 }
 
 /**
- * \brief Check if USART_2 data is transmitted
+ * \brief Check if USART_3 data is transmitted
  *
  * \return Receiver ready status
  * \retval true  Data is not completely shifted out of the shift register
  * \retval false Data completely shifted out if the USART shift register
  */
-bool USART_2_is_tx_busy()
+bool USART_3_is_tx_busy()
 {
-	return (!(USART2.STATUS & USART_TXCIF_bm));
+	return (!(USART3.STATUS & USART_TXCIF_bm));
 }
 
 /**
- * \brief Read one character from USART_2
+ * \brief Read one character from USART_3
  *
  * Function will block if a character is not available.
  *
- * \return Data read from the USART_2 module
+ * \return Data read from the USART_3 module
  */
-uint8_t USART_2_read()
+uint8_t USART_3_read()
 {
-	while (!(USART2.STATUS & USART_RXCIF_bm))
+	while (!(USART3.STATUS & USART_RXCIF_bm))
 		;
-	return USART2.RXDATAL;
+	return USART3.RXDATAL;
 }
 
 /**
- * \brief Write one character to USART_2
+ * \brief Write one character to USART_3
  *
  * Function will block until a character can be accepted.
  *
@@ -201,9 +201,9 @@ uint8_t USART_2_read()
  *
  * \return Nothing
  */
-void USART_2_write(const uint8_t data)
+void USART_3_write(const uint8_t data)
 {
-	while (!(USART2.STATUS & USART_DREIF_bm))
+	while (!(USART3.STATUS & USART_DREIF_bm))
 		;
-	USART2.TXDATAL = data;
+	USART3.TXDATAL = data;
 }
