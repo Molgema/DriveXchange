@@ -31,7 +31,7 @@ drivers:
       RESERVED_InputFreq: 4000000
       RESERVED_InputFreq_id: Internal high-frequency oscillator
       _$freq_output_32kHz divided by 32: 1024
-      _$freq_output_External clock: '8000000'
+      _$freq_output_External clock: 8000000
       _$freq_output_Internal high-frequency oscillator: 4000000
       _$freq_output_Main Clock (CLK_MAIN): 4000000
       _$freq_output_PLL: 4000000
@@ -89,8 +89,8 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
-  USART_0:
-    user_label: USART_0
+  USART_2:
+    user_label: USART_2
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART2::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
     functionality: USART
     api: Drivers:USART:Basic
@@ -199,6 +199,13 @@ pads:
     configuration: null
 toolchain_options:
 - definition:
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
+  configuration:
+    compiler_config:
+      avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
+    linker_config:
+      avrgcc_linker_miscellaneous_LinkerFlags: ''
+- definition:
     identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.xc8:7.0.0
   configuration:
     compiler_config:
@@ -207,13 +214,6 @@ toolchain_options:
       xc8_linker_miscellaneous_LinkerFlags: ''
 - definition:
     identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
-  configuration:
-    compiler_config:
-      avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
-    linker_config:
-      avrgcc_linker_miscellaneous_LinkerFlags: ''
-- definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99

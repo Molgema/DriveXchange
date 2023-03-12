@@ -37,7 +37,7 @@
 #include <system.h>
 
 /* configure the pins and initialize the registers */
-void USART_0_initialization(void)
+void USART_2_initialization(void)
 {
 
 	// Set pin direction to input
@@ -69,7 +69,7 @@ void USART_0_initialization(void)
 
 	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
 
-	USART_0_init();
+	USART_2_init();
 }
 
 /**
@@ -81,7 +81,7 @@ void system_init()
 
 	CLKCTRL_init();
 
-	USART_0_initialization();
+	USART_2_initialization();
 
 	SLPCTRL_init();
 
