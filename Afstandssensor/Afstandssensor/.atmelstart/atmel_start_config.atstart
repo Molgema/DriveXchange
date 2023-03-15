@@ -89,9 +89,9 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
-  USART_3:
-    user_label: USART_3
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART3::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
+  USART_0:
+    user_label: USART_0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART0::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
     functionality: USART
     api: Drivers:USART:Basic
     configuration:
@@ -125,11 +125,11 @@ drivers:
     variant:
       specification: CMODE=0
       required_signals:
-      - name: USART3/RXD
-        pad: PB1
+      - name: USART0/RXD
+        pad: PA1
         label: RXD
-      - name: USART3/TXD
-        pad: PB0
+      - name: USART0/TXD
+        pad: PA0
         label: TXD
     clocks:
       domain_group:
@@ -185,17 +185,17 @@ drivers:
     clocks:
       domain_group: null
 pads:
-  PB0:
-    name: PB0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB0
+  PA0:
+    name: PA0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PA0
     mode: Digital output
-    user_label: PB0
+    user_label: PA0
     configuration: null
-  PB1:
-    name: PB1
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB1
+  PA1:
+    name: PA1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PA1
     mode: Digital input
-    user_label: PB1
+    user_label: PA1
     configuration: null
 toolchain_options:
 - definition:

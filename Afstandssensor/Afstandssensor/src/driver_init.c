@@ -37,13 +37,13 @@
 #include <system.h>
 
 /* configure the pins and initialize the registers */
-void USART_3_initialization(void)
+void USART_0_initialization(void)
 {
 
 	// Set pin direction to input
-	PB1_set_dir(PORT_DIR_IN);
+	PA1_set_dir(PORT_DIR_IN);
 
-	PB1_set_pull_mode(
+	PA1_set_pull_mode(
 	    // <y> Pull configuration
 	    // <id> pad_pull_config
 	    // <PORT_PULL_OFF"> Off
@@ -52,16 +52,16 @@ void USART_3_initialization(void)
 
 	// Set pin direction to output
 
-	PB0_set_level(
+	PA0_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
 	    // <false"> Low
 	    // <true"> High
 	    false);
 
-	PB0_set_dir(PORT_DIR_OUT);
+	PA0_set_dir(PORT_DIR_OUT);
 
-	USART_3_init();
+	USART_0_init();
 }
 
 /**
@@ -73,7 +73,7 @@ void system_init()
 
 	CLKCTRL_init();
 
-	USART_3_initialization();
+	USART_0_initialization();
 
 	SLPCTRL_init();
 

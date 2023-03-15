@@ -53,12 +53,12 @@
         </TopLevelComponents>
         <AcmeActionInfos>
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="WNBOEQFAZdbe+OB5uba59A" />
+          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="hnT90A5xkfhA1MRv+mzhTw" />
           <AcmeProjectActionInfo Action="File" Source="include/driver_init.h" IsConfig="false" Hash="g23VQOsgNxYYf0AbGr/7aQ" />
-          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="vnomj25p8R8/L/zug556NQ" />
+          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="N2+JbCzs5d3UsUHnMPcjCw" />
           <AcmeProjectActionInfo Action="File" Source="driver_isr.c" IsConfig="false" Hash="MvMMK2GhxVFkAQcdYQz48Q" />
-          <AcmeProjectActionInfo Action="File" Source="examples/include/usart_basic_example.h" IsConfig="false" Hash="bStTC774yM69kbCRkVV/iA" />
-          <AcmeProjectActionInfo Action="File" Source="examples/src/usart_basic_example.c" IsConfig="false" Hash="IBZUOafVebz4sA2K53xYhA" />
+          <AcmeProjectActionInfo Action="File" Source="examples/include/usart_basic_example.h" IsConfig="false" Hash="jqzG72KywS875Xh6BBr/EA" />
+          <AcmeProjectActionInfo Action="File" Source="examples/src/usart_basic_example.c" IsConfig="false" Hash="8EWqyc6nUHi+MQFT49+DRw" />
           <AcmeProjectActionInfo Action="File" Source="include/bod.h" IsConfig="false" Hash="ZLQQMk2tvecp7+/rnFJ88w" />
           <AcmeProjectActionInfo Action="File" Source="include/ccp.h" IsConfig="false" Hash="5tZzJbuv1SnHXckp4Dkw+w" />
           <AcmeProjectActionInfo Action="File" Source="include/clkctrl.h" IsConfig="false" Hash="zM1JGmuFxSf4GSXRFGmwTg" />
@@ -68,13 +68,13 @@
           <AcmeProjectActionInfo Action="File" Source="include/rstctrl.h" IsConfig="false" Hash="QzSR3iFGzImWwhFxG4W8ag" />
           <AcmeProjectActionInfo Action="File" Source="include/slpctrl.h" IsConfig="false" Hash="RmK0UGftfBRePkRJ8R5ifw" />
           <AcmeProjectActionInfo Action="File" Source="include/system.h" IsConfig="false" Hash="gRp0W4BvirKsaqDJFNTyQw" />
-          <AcmeProjectActionInfo Action="File" Source="include/usart_basic.h" IsConfig="false" Hash="EUPODSZ/ECQWQMJv1Wx0Xg" />
+          <AcmeProjectActionInfo Action="File" Source="include/usart_basic.h" IsConfig="false" Hash="qW3Fco6lz3mmOvWG4ENFPA" />
           <AcmeProjectActionInfo Action="File" Source="src/bod.c" IsConfig="false" Hash="vImbYMKH5/8OtCuOiBVR6g" />
           <AcmeProjectActionInfo Action="File" Source="src/clkctrl.c" IsConfig="false" Hash="cG1qdAkxsYSNwmDX3bW0bQ" />
           <AcmeProjectActionInfo Action="File" Source="src/cpuint.c" IsConfig="false" Hash="8QNlbJZ6R6wBiCT5nh902g" />
           <AcmeProjectActionInfo Action="File" Source="src/protected_io.S" IsConfig="false" Hash="sgFkmFP7h1y8L07bVZahaQ" />
           <AcmeProjectActionInfo Action="File" Source="src/slpctrl.c" IsConfig="false" Hash="QkIqUubBLg6fH7ESMxxauQ" />
-          <AcmeProjectActionInfo Action="File" Source="src/usart_basic.c" IsConfig="false" Hash="qgdYD7ZrOIsoOyh1nckm8w" />
+          <AcmeProjectActionInfo Action="File" Source="src/usart_basic.c" IsConfig="false" Hash="IFkuSZHrkvSg97Okmmvtkg" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler.h" IsConfig="false" Hash="jaaWqpCXnRJMciuXpjSfgQ" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler/gas.h" IsConfig="false" Hash="wV+34zXWOOJ7jfwQibBgLQ" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler/iar.h" IsConfig="false" Hash="re7qP3QC0FK72z2UZ4UoFg" />

@@ -12,7 +12,7 @@ bool AvailableBytes (unsigned int bytes)
 {
 	while (i < bytes) 
 	{
-		if ( USART_3_is_rx_ready() ) 
+		if ( USART_0_is_rx_ready() ) 
 		{
 			i++;		
 		} 
@@ -24,29 +24,11 @@ bool AvailableBytes (unsigned int bytes)
 /* Clear receive buffer */
 void FlushReceiver ( )
 {
-	while ( !USART_3_is_rx_ready() )
+	while ( !USART_0_is_rx_ready() )
 	{
-		USART_3_read();
+		USART_0_read();
 	}		
 }
-
-/* Waarschijnlijk niet nodig omdat USART_0_read() al bytes uitlest van RX */
-/* Read low byte from RX*/
-//uint8_t USART_3_readLow()
-//{
-//	while (!(USART3.STATUS & USART_RXCIF_bm))
-//	;
-//	return USART3.RXDATAL;
-//}
-
-/* Read high byte from RX*/
-//uint8_t USART_3_readHigh()
-//{
-//	while (!(USART3.STATUS & USART_RXCIF_bm))
-//	;
-//	return USART3.RXDATAH;
-//}
-
 
 int main(void)
 {
@@ -59,12 +41,12 @@ int main(void)
 		FlushReceiver(); /* Clear receive buffer */
 					
 		_delay_ms(500);
-		USART_3_write(0x55);
+		USART_0_write(0x55);
 		
 		if (AvailableBytes(2)) 
 		{
-			HighLen = USART_3_read();
-			LowLen = USART_3_read();
+			HighLen = USART_0_read();
+			LowLen = USART_0_read();
 			
 			Len_mm = (HighLen*256) + LowLen; 
 		}
