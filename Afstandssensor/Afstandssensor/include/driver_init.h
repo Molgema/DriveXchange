@@ -45,6 +45,8 @@
 
 #include <usart_basic.h>
 
+#include <usart_basic.h>
+
 #include <slpctrl.h>
 #include <cpuint.h>
 #include <bod.h>

@@ -31,7 +31,7 @@ drivers:
       RESERVED_InputFreq: 4000000
       RESERVED_InputFreq_id: Internal high-frequency oscillator
       _$freq_output_32kHz divided by 32: 1024
-      _$freq_output_External clock: 8000000
+      _$freq_output_External clock: '8000000'
       _$freq_output_Internal high-frequency oscillator: 4000000
       _$freq_output_Main Clock (CLK_MAIN): 4000000
       _$freq_output_PLL: 4000000
@@ -89,9 +89,9 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
-  USART_0:
-    user_label: USART_0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART0::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
+  USART_2:
+    user_label: USART_2
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART2::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
     functionality: USART
     api: Drivers:USART:Basic
     configuration:
@@ -125,11 +125,62 @@ drivers:
     variant:
       specification: CMODE=0
       required_signals:
-      - name: USART0/RXD
-        pad: PA1
+      - name: USART2/RXD
+        pad: PF5
         label: RXD
-      - name: USART0/TXD
-        pad: PA0
+      - name: USART2/TXD
+        pad: PF4
+        label: TXD
+    clocks:
+      domain_group:
+        nodes:
+        - name: USART
+          input: Main Clock (CLK_MAIN)
+          external: false
+          external_frequency: 0
+        configuration:
+          usart_clock_source: Main Clock (CLK_MAIN)
+  USART_3:
+    user_label: USART_3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART3::driver_config_definition::Async.Polled.Mode::Drivers:USART:Basic
+    functionality: USART
+    api: Drivers:USART:Basic
+    configuration:
+      baud_rate: 115200
+      ctrla_abeie: false
+      ctrla_dreie: false
+      ctrla_lbme: false
+      ctrla_rxcie: false
+      ctrla_rxsie: false
+      ctrla_txcie: false
+      ctrlb_mpcm: false
+      ctrlb_odme: false
+      ctrlb_rxen: false
+      ctrlb_rxmode: Normal mode
+      ctrlb_sfden: false
+      ctrlb_txen: true
+      ctrlc_chsize: 'Character size: 8 bit'
+      ctrlc_cmode: Asynchronous USART
+      ctrlc_pmode: No Parity
+      ctrlc_sbmode: 1 stop bit
+      ctrlc_ucpha: false
+      ctrlc_udord: false
+      dbgctrl_abmbp: false
+      dbgctrl_dbgrun: false
+      evctrl_irei: false
+      printf_support: false
+      rxplctrl_rxpl: 0
+      txplctrl_txpl: 0
+      usart_ctrla_rs485: RS485 Mode disabled
+    optional_signals: []
+    variant:
+      specification: CMODE=0
+      required_signals:
+      - name: USART3/RXD
+        pad: PB1
+        label: RXD
+      - name: USART3/TXD
+        pad: PB0
         label: TXD
     clocks:
       domain_group:
@@ -185,17 +236,29 @@ drivers:
     clocks:
       domain_group: null
 pads:
-  PA0:
-    name: PA0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PA0
+  PB0:
+    name: PB0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB0
     mode: Digital output
-    user_label: PA0
+    user_label: PB0
     configuration: null
-  PA1:
-    name: PA1
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PA1
+  PB1:
+    name: PB1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB1
     mode: Digital input
-    user_label: PA1
+    user_label: PB1
+    configuration: null
+  PF4:
+    name: PF4
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PF4
+    mode: Digital output
+    user_label: PF4
+    configuration: null
+  PF5:
+    name: PF5
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PF5
+    mode: Digital input
+    user_label: PF5
     configuration: null
 toolchain_options:
 - definition:
@@ -206,14 +269,14 @@ toolchain_options:
     linker_config:
       xc8_linker_miscellaneous_LinkerFlags: ''
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
     linker_config:
       avrgcc_linker_miscellaneous_LinkerFlags: ''
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
