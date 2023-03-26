@@ -33,32 +33,89 @@
  * to avoid losing it when reconfiguring.
  */
 
-#ifndef DRIVER_INIT_H_INCLUDED
-#define DRIVER_INIT_H_INCLUDED
+#include "driver_init.h"
+#include <system.h>
 
-#include <compiler.h>
-#include <clock_config.h>
-#include <port.h>
-#include <atmel_start_pins.h>
+/* configure the pins and initialize the registers */
+void USART_2_initialization(void)
+{
 
-#include <clkctrl.h>
+	// Set pin direction to input
+	PF5_set_dir(PORT_DIR_IN);
 
-#include <usart.h>
+	PF5_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
 
-#include <usart.h>
+	/* set the alternate pin mux */
 
-#include <slpctrl.h>
-#include <cpuint.h>
-#include <bod.h>
+	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+	// Set pin direction to output
 
-void system_init(void);
+	PF4_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
 
-#ifdef __cplusplus
+	PF4_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
+
+	USART_2_init();
 }
-#endif
 
-#endif /* DRIVER_INIT_H_INCLUDED */
+/* configure the pins and initialize the registers */
+void USART_3_initialization(void)
+{
+
+	// Set pin direction to input
+	PB1_set_dir(PORT_DIR_IN);
+
+	PB1_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
+
+	// Set pin direction to output
+
+	PB0_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PB0_set_dir(PORT_DIR_OUT);
+
+	USART_3_init();
+}
+
+/**
+ * \brief System initialization
+ */
+void system_init()
+{
+	mcu_init();
+
+	CLKCTRL_init();
+
+	USART_2_initialization();
+
+	USART_3_initialization();
+
+	SLPCTRL_init();
+
+	CPUINT_init();
+
+	BOD_init();
+}

@@ -56,5 +56,7 @@ int8_t CPUINT_init()
 
 	// CPUINT.LVL1VEC = 0x0 << CPUINT_LVL1VEC_gp; /* Interrupt Vector with High Priority: 0x0 */
 
+	ENABLE_INTERRUPTS();
+
 	return 0;
 }

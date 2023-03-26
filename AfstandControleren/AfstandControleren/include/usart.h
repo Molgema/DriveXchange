@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief USART basic driver.
+ * \brief USART init driver.
  *
  (c) 2020 Microchip Technology Inc. and its subsidiaries.
 
@@ -25,11 +25,11 @@
  *
  */
 
-#ifndef USART_BASIC_H_INCLUDED
-#define USART_BASIC_H_INCLUDED
+#ifndef USART_H_INCLUDED
+#define USART_H_INCLUDED
 
-#include <atmel_start.h>
-#include <stdbool.h>
+#include <stdint.h>
+#include <compiler.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,53 +40,13 @@ extern "C" {
 
 int8_t USART_2_init();
 
-void USART_2_enable();
-
-void USART_2_enable_rx();
-
-void USART_2_enable_tx();
-
-void USART_2_disable();
-
-uint8_t USART_2_get_data();
-
-bool USART_2_is_tx_ready();
-
-bool USART_2_is_rx_ready();
-
-bool USART_2_is_tx_busy();
-
-uint8_t USART_2_read(void);
-
-void USART_2_write(const uint8_t data);
-
 /* Normal Mode, Baud register value */
 #define USART3_BAUD_RATE(BAUD_RATE) ((float)(4000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
 int8_t USART_3_init();
 
-void USART_3_enable();
-
-void USART_3_enable_rx();
-
-void USART_3_enable_tx();
-
-void USART_3_disable();
-
-uint8_t USART_3_get_data();
-
-bool USART_3_is_tx_ready();
-
-bool USART_3_is_rx_ready();
-
-bool USART_3_is_tx_busy();
-
-uint8_t USART_3_read(void);
-
-void USART_3_write(const uint8_t data);
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* USART_BASIC_H_INCLUDED */
+#endif /* USART_H_INCLUDED */

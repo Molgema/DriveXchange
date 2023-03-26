@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief USART basic driver example.
+ * \brief BOD related functionality implementation.
  *
  (c) 2020 Microchip Technology Inc. and its subsidiaries.
 
@@ -25,11 +25,32 @@
  *
  */
 
-#ifndef USART_BASIC_EXAMPLE_H
-#define USART_BASIC_EXAMPLE_H
+/**
+ * \defgroup doc_driver_system_bod Brown-Out Detector (BOD)
+ * \ingroup doc_driver_system
+ *
+ * \section doc_driver_bod_rev Revision History
+ * - v0.0.0.1 Initial Commit
+ *
+ *@{
+ */
+#include <bod.h>
+#include <ccp.h>
 
-uint8_t USART_2_test_usart_basic(void);
+/**
+ * \brief Initialize Brownout Detector
+ *
+ * \return Initialization status.
+ */
+int8_t BOD_init()
+{
 
-uint8_t USART_3_test_usart_basic(void);
+	// ccp_write_io((void*)&(BOD.CTRLA),BOD_SLEEP_DIS_gc /* Disabled */);
 
-#endif /* USART_BASIC_EXAMPLE_H */
+	BOD.INTCTRL = 0 << BOD_VLMIE_bp        /* voltage level monitor interrrupt enable: disabled */
+	              | BOD_VLMCFG_FALLING_gc; /* Interrupt when supply goes below VLM level */
+
+	// BOD.VLMCTRLA = BOD_VLMLVL_5ABOVE_gc; /* VLM threshold 5% above BOD level */
+
+	return 0;
+}
