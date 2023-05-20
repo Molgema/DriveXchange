@@ -20,6 +20,8 @@ volatile double posRobot = 0;
 volatile double adjustedPos = 0;
 volatile double setPoint = (7.0*4095.0)/2;
 
+typedef enum 
+
 /*Variables for setting k values*/
 volatile double k_p = (255.0-191.0)/((7.0*4095.0)/2);
 volatile double k_i = 0;
@@ -73,6 +75,10 @@ void USART_3_sendString(char * str)
 	{
 		USART_3_sendChar(str[i]);
 	}
+}
+
+void stateMachine() {
+	int lastEvent = currentEvent; 
 }
 
 void normalizeSensors(volatile double* normalizedArr ,volatile double* sensorData, volatile double* min, volatile double* max, size_t length) 
