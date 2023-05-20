@@ -58,7 +58,7 @@ void FlushReceiver ( )
 void GetDistance ()
 {
 	USART_2_write(0x55); //0x55 is the input used for the US-100 to send distance data
-	_delay_ms(10); //Giving sensor some time to get non-zero data
+	_delay_ms(50); //Giving sensor some time to get non-zero data
 		
 	HighLen = USART_2_get_data(); //Reads the most significant byte from the US-100
 	LowLen = USART_2_get_data(); //Reads the least significant byte from the US-100
