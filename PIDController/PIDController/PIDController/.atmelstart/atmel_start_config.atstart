@@ -430,9 +430,9 @@ drivers:
     functionality: RTC
     api: Drivers:RTC:Init
     configuration:
-      $input: 32768
+      $input: 0
       $input_id: Internal 32.768 kHz oscillator
-      RESERVED_InputFreq: 32768
+      RESERVED_InputFreq: 0
       RESERVED_InputFreq_id: Internal 32.768 kHz oscillator
       _$freq_output_RTC Clock (CLK_RTC): 1024
       enable_rtc: true
@@ -446,7 +446,7 @@ drivers:
       rtc_dbgctrl_dbgrun: false
       rtc_intctrl_cmp: false
       rtc_intctrl_ovf: false
-      rtc_per: 8
+      rtc_per: 28
       rtc_pitctrla_period: 'Off'
       rtc_pitctrla_piten: false
       rtc_pitdbgctrl_dbgrun: false
@@ -490,6 +490,13 @@ pads:
     mode: Digital input
     user_label: PB1
     configuration: null
+  SW0:
+    name: PB2
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB2
+    mode: Digital input
+    user_label: SW0
+    configuration:
+      pad_pull_config: Pull-up
   PC0:
     name: PC0
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC0

@@ -1,5 +1,6 @@
 #include <atmel_start.h>
 #include <avr/sleep.h>
+#include <util/delay.h>
 
 /*Amount of sensors on robot*/
 #define NUM_SENSORS 8 
@@ -10,20 +11,26 @@
 
 char row[128];
 char number[128];
+char max[128];
+char min[128];
 volatile double minSensor[NUM_SENSORS] = {0};
 volatile double maxSensor[NUM_SENSORS] = {0}; 
 volatile double sensorArr[NUM_SENSORS] = {0};
 volatile double normArr[NUM_SENSORS] = {0};
-volatile double testArr[NUM_SENSORS] = {12, 204, 4095, 4095, 4095, 4095, 4095, 4095};
+volatile double magVal = 0; 
+volatile double magCount = 0; 
+volatile double magAvg = 0;
+volatile double magSum = 0;  
+
 
 volatile double posRobot = 0;
 volatile double adjustedPos = 0;
-volatile double setPoint = (7.0*4095.0)/2;
+volatile double setPoint = (7.0*1000.0)/2; //Waarde die overeenkomt met midden van de lijn 
 
-typedef enum 
+/*typedef enum */
 
 /*Variables for setting k values*/
-volatile double k_p = (255.0-191.0)/((7.0*4095.0)/2);
+volatile double k_p = (255.0-191.0)/((7.0*1000.0)/2); //Proportionele correctie factor PID
 volatile double k_i = 0;
 volatile double k_d = 0;
 
@@ -34,9 +41,13 @@ uint8_t speedL = 0;
 uint8_t speedR = 0;   
 	
 /*Flag for sending to computer with USART3*/
+volatile uint8_t cal_flag = 0;
+volatile uint8_t max_flag = 0;
+volatile uint8_t min_flag = 0; 
 volatile uint8_t read_flag = 0;
 volatile uint8_t send_flag = 0;
-volatile uint8_t sensorPos = 0; 
+volatile uint8_t mag_flag = 0;
+volatile uint8_t sensorPos = 0;  
 
 ISR (ADC0_RESRDY_vect) 
 {
@@ -61,6 +72,17 @@ ISR (ADC0_RESRDY_vect)
 	ADC0.INTFLAGS = ADC_RESRDY_bm; 
 }
 
+ISR (PORTB_PORT_vect)
+{
+	if (cal_flag == 0) max_flag = 1; 
+
+	if (cal_flag == 1) min_flag = 1;
+	
+	cal_flag++;
+	
+	PORTB.INTFLAGS = PIN2_bm;
+}
+
 /*Testing with USART3*/
 void USART_3_sendChar(uint8_t data) 
 {
@@ -77,68 +99,98 @@ void USART_3_sendString(char * str)
 	}
 }
 
-void stateMachine() {
-	int lastEvent = currentEvent; 
-}
+// void stateMachine() {
+// 	int lastEvent = currentEvent; 
+// }
 
 void normalizeSensors(volatile double* normalizedArr ,volatile double* sensorData, volatile double* min, volatile double* max, size_t length) 
 {	
 	for (volatile size_t i = 0; i < length; i++)
 	{	
-		if (sensorData[i] < min[i]) 
-		{
-			min[i] = sensorData[i];
-			volatile double minTest = min[i];
-		}
-		
-		if (sensorData[i] > maxSensor[i]) 
-		{
-			max[i] = sensorData[i];
-			volatile double maxTest = max[i];
-		}
-		
-		normalizedArr[i] = ((sensorData[i] - min[i])/(max[i]-min[i]))*255.0;
+		if (sensorData[i] < min[i]) min[i] = sensorData[i];
+	
+		if (sensorData[i] > maxSensor[i]) max[i] = sensorData[i];
+
+		normalizedArr[i] = ((sensorData[i] - min[i])/(max[i]-min[i]))*1000.0;
 	}		
 }
 
-void readSensors() {
+void readSens(volatile double* readArr) 
+{
 	switch (ADC0.MUXPOS)
 	{
 		case 0x06:
-			sensorArr[sensorPos] = ADC0_RES;		
+			readArr[sensorPos] = ADC0_RES;		
 			ADC0.MUXPOS = 0x03;
 			break;
 		case 0x03:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x02;
 			break;
 		case 0x02:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x01;
 			break;
 		case 0x01:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x00;
 			break;
 		case 0x00:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x07;
 			break;
 		case 0x07:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x05;
 			break;
 		case 0x05:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
 			ADC0.MUXPOS = 0x04;
 			break;
 		case 0x04:
-			sensorArr[++sensorPos] = ADC0_RES;
+			readArr[++sensorPos] = ADC0_RES;
+			ADC0.MUXPOS = 0x0B;
+			break;
+		case 0x0B:
+			magVal = ADC0_RES / 16.0;		
 			ADC0.MUXPOS = 0x06;
 			break;	
 	}
 }
 
+//Kalibreren van de IR sensoren door maximum en minimum van alle sensoren te bepalen na het indrukken van SW0 
+void calSens() 
+{
+	if (max_flag && read_flag)
+	{
+		readSens(maxSensor);
+		read_flag = 0;
+	
+		if (sensorPos == 7)
+		{
+			sprintf(max, "Max is %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf \n\n", maxSensor[0], maxSensor[1], maxSensor[2], maxSensor[3], maxSensor[4], maxSensor[5], maxSensor[6], maxSensor[7]);
+			USART_3_sendString(max);
+			max_flag = 0;
+			sensorPos = 0;
+		}
+	}
+
+	if (min_flag && read_flag)
+	{
+		readSens(minSensor);
+		read_flag = 0;
+	
+		if (sensorPos == 7)
+		{
+			sprintf(min, "Min is %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf \n\n", minSensor[0], minSensor[1], minSensor[2], minSensor[3], minSensor[4], minSensor[5], minSensor[6], minSensor[7]);
+			USART_3_sendString(min);
+			min_flag = 0;
+			sensorPos = 0;
+		}
+	}
+}
+
+//Bepalen van de positie van de robot ten opzichte van het midden van de lijn 
 void calcPos(volatile double* valueSensor, size_t length)
 {
 	double avgSum = 0; 
@@ -146,16 +198,14 @@ void calcPos(volatile double* valueSensor, size_t length)
 	detLine = false;
 	
 	for (size_t i = 0; i < 8; i++)
-	{
-		if (valueSensor[i] < 3276 )
-		{
-			detLine = true; 
-		}
+	{	
+		if (valueSensor[i] < 200) detLine = true;
 		
-		if (valueSensor[i] < 3890) 
+		if (valueSensor[i] < 50) 
 		{
-			avgSum += (valueSensor[i])*(i*4095);
-			avg += valueSensor[i]; 
+			avgSum += (valueSensor[i])*(i*1000.0);
+			avg += valueSensor[i];
+			detLine = true; 
 		}
 	}
 	
@@ -173,6 +223,41 @@ void calcPos(volatile double* valueSensor, size_t length)
 	}
 }
 
+void calcMag () {
+	magCount = magCount + 1.0;
+	magSum += magVal;
+	
+	if (magCount == 3.0) {
+		magAvg = magSum / magCount;
+		magCount = 0; 
+		send_flag = 1; 
+	}
+}
+
+PIDControl () 
+{
+	if (read_flag && cal_flag >= 3) {
+		readSens(sensorArr);
+		calcMag(); 
+		read_flag = 0;
+	}
+
+	if (sensorPos == 7)
+	{
+		normalizeSensors(normArr, sensorArr, minSensor, maxSensor, NUM_SENSORS);
+		calcPos(normArr, NUM_SENSORS);
+	
+		sensorPos = 0;
+		send_flag = 2;
+	}
+}
+
+// void calcPos(volatile double* valueSensor, size_t length)
+// {
+// 	
+// }
+
+//Bepalen aansturing van motoren robot
 void motorCtrl()
 {	
 	adjustedPos = posRobot*k_p;
@@ -190,6 +275,7 @@ int main(void)
 	atmel_start_init();
 
 	VREF_ADC0REF |= VREF_REFSEL_VDD_gc;
+	PORTB.PIN2CTRL |= PORT_ISC_FALLING_gc;
 
 	/* Replace with your application code */
 	while (1) 
@@ -202,25 +288,22 @@ int main(void)
 		
 		//normalizeSensors(normArr, sensorArr, minSensor, maxSensor, NUM_SENSORS); 
 		
-		if (read_flag) {
-			readSensors(); 
-			read_flag = 0; 
+		calSens(); 
+		
+		PIDControl();
+		
+		motorCtrl(); 
+		
+		if (send_flag == 1) {
+			
 		}
 		
-		if (sensorPos == 7)
-		{
-			calcPos(testArr, NUM_SENSORS);
-			motorCtrl();
-			sensorPos = 0;
-			send_flag = 1;
-		} 
-		
-		if (send_flag) 
+		if (send_flag == 2) 
 		{
 // 			sprintf(row, "%5s %5s %5s\n", "k_p", "k_i", "k_d");
 // 			sprintf(number, "%5.3f %5.3f %5.3f\n", proportional, integral, derivative);
 			sprintf(row, "%4s %4s %4s %4s %4s %4s %4s %4s %6s %3s %3s %3s \n", "IR0", "IR1", "IR2", "IR3", "IR4", "IR5", "IR6", "IR7", "POS", "Adj", "L", "R"); 
-			sprintf(number, "%4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %6.0lf %3.0lf %3d %3d \n\n", sensorArr[0], sensorArr[1], sensorArr[2], sensorArr[3], sensorArr[4], sensorArr[5], sensorArr[6], sensorArr[7], posRobot, adjustedPos, speedL, speedR);
+			sprintf(number, "%4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %4.0lf %6.0lf %3.0lf %3d %3d \n\n", normArr[0], normArr[1], normArr[2], normArr[3], normArr[4], normArr[5], normArr[6], normArr[7], posRobot, adjustedPos, speedL, speedR);
 			
 			//char buffer[64];
 			//sprintf(buffer, "%.0f\n", sensorArr[1]);

@@ -330,6 +330,13 @@ drivers:
       definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.0
       name: TCA0/WO/0
       label: WO/0
+    - identifier: TIMER_0:WO/1
+      pad: PC1
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.1
+      name: TCA0/WO/1
+      label: WO/1
     - identifier: TIMER_0:WO/2
       pad: PC2
       mode: Enabled
@@ -337,6 +344,27 @@ drivers:
       definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.2
       name: TCA0/WO/2
       label: WO/2
+    - identifier: TIMER_0:WO/3
+      pad: PC3
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.3
+      name: TCA0/WO/3
+      label: WO/3
+    - identifier: TIMER_0:WO/4
+      pad: PC4
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.4
+      name: TCA0/WO/4
+      label: WO/4
+    - identifier: TIMER_0:WO/5
+      pad: PC5
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.5
+      name: TCA0/WO/5
+      label: WO/5
     variant: null
     clocks:
       domain_group:
@@ -369,7 +397,7 @@ drivers:
       rtc_dbgctrl_dbgrun: false
       rtc_intctrl_cmp: false
       rtc_intctrl_ovf: false
-      rtc_per: 512
+      rtc_per: 28
       rtc_pitctrla_period: 'Off'
       rtc_pitctrla_piten: false
       rtc_pitdbgctrl_dbgrun: false
@@ -413,11 +441,24 @@ pads:
     mode: Digital input
     user_label: PB1
     configuration: null
+  LED:
+    name: PB3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB3
+    mode: Digital output
+    user_label: LED
+    configuration:
+      pad_initial_level: High
   PC0:
     name: PC0
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC0
     mode: Digital output
     user_label: PC0
+    configuration: null
+  PC1:
+    name: PC1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC1
+    mode: Digital output
+    user_label: PC1
     configuration: null
   PC2:
     name: PC2
@@ -425,11 +466,23 @@ pads:
     mode: Digital output
     user_label: PC2
     configuration: null
-  LED0:
-    name: PE2
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PE2
+  PC3:
+    name: PC3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC3
     mode: Digital output
-    user_label: LED0
+    user_label: PC3
+    configuration: null
+  PC4:
+    name: PC4
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC4
+    mode: Digital output
+    user_label: PC4
+    configuration: null
+  PC5:
+    name: PC5
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC5
+    mode: Digital output
+    user_label: PC5
     configuration: null
   PE3:
     name: PE3
@@ -446,14 +499,14 @@ toolchain_options:
     linker_config:
       xc8_linker_miscellaneous_LinkerFlags: ''
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
     linker_config:
       avrgcc_linker_miscellaneous_LinkerFlags: ''
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99

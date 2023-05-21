@@ -54,7 +54,7 @@ int8_t RTC_0_init()
 	            | 1 << RTC_RTCEN_bp     /* Enable: enabled */
 	            | 0 << RTC_RUNSTDBY_bp; /* Run In Standby: disabled */
 
-	RTC.PER = 0x8; /* Period: 0x8 */
+	RTC.PER = 0x1c; /* Period: 0x1c */
 
 	RTC.CLKSEL = RTC_CLKSEL_OSC32K_gc; /* Internal 32.768 kHz oscillator */
 

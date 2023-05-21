@@ -1,40 +1,62 @@
 #include <atmel_start.h>
 #include <avr/sleep.h>
-#include <util/delay.h>
 
-volatile unsigned int delay_flag = 0; 
-volatile unsigned int rtc_counter = 0; 
+volatile double magVal = 0; 
+volatile double	 magSum = 0;
+volatile double magAvg = 0; 
+volatile double magCounter = 0;
+char ValBuffer[24];  
+char AvgBuffer[24]; 
 
-ISR (PORTB_PORT_vect) {
-	delay_flag = 1; 
-	rtc_counter = 0; 
+ISR (ADC0_RESRDY_vect)
+{
+	magVal = ADC0.RES / 16.0;
+	magSum += magVal;
+	magCounter = magCounter + 1.0;
 	
-	PORTB.INTFLAGS = PIN2_bm;  	
+	ADC0.INTFLAGS = ADC_RESRDY_bm;
 }
 
-ISR (RTC_CNT_vect) {
-	if (delay_flag) rtc_counter++; 
-	
-	RTC.INTFLAGS = RTC_OVF_bm;
+/*Testing with USART3*/
+void USART_3_sendChar(uint8_t data)
+{
+	while (!(USART3.STATUS & USART_DREIF_bm));
+	USART3.TXDATAL = data;
 }
 
+/*Testing with USART3*/
+void USART_3_sendString(char * str)
+{
+	for(volatile size_t i = 0; i < strlen(str); i++)
+	{
+		USART_3_sendChar(str[i]);
+	}
+}
 
 int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 	
-	PORTB.PIN2CTRL |= PORT_ISC_FALLING_gc; 
+	VREF_ADC0REF |= VREF_REFSEL_VDD_gc;
 
 	/* Replace with your application code */
 	while (1) {
 		sleep_mode();
 		
-		if (delay_flag && rtc_counter == 80) {
-			LED0_toggle_level(0); 
-			delay_flag = 0;
-			rtc_counter = 0;  	
+		sprintf(ValBuffer, "Huidige magneetwaarde is %.2lf. \n", magVal);
+		
+		if (magCounter == 9.0) {
+			magAvg = magSum / magCounter;
+			sprintf(AvgBuffer, "Gemiddelde magneetwaarde is %.2lf. \n", magAvg);
+			USART_3_sendString(AvgBuffer);
+			
+			magCounter = 0;
+			magSum = 0; 
 		}
+		
+		if (magAvg >= 150) LED_set_level(1);
+		else LED_set_level(0);
 
 	}
 }

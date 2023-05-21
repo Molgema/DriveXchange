@@ -53,9 +53,9 @@
         </TopLevelComponents>
         <AcmeActionInfos>
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="Zfe6CFwEA2xYL+8RE1SstQ" />
+          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="qNc31XGWzdAQPfNNdC18bQ" />
           <AcmeProjectActionInfo Action="File" Source="include/driver_init.h" IsConfig="false" Hash="51wMODTOqB7Z1PRMK0Qvgg" />
-          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="C+gRfN4VTG3s1IZ12TCqAw" />
+          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="6JGtjzuxeacSqYXd/jjBug" />
           <AcmeProjectActionInfo Action="File" Source="driver_isr.c" IsConfig="false" Hash="MvMMK2GhxVFkAQcdYQz48Q" />
           <AcmeProjectActionInfo Action="File" Source="include/adc.h" IsConfig="false" Hash="4vFxqlTkrADVKB53+pd2Jg" />
           <AcmeProjectActionInfo Action="File" Source="include/bod.h" IsConfig="false" Hash="ZLQQMk2tvecp7+/rnFJ88w" />
@@ -77,7 +77,7 @@
           <AcmeProjectActionInfo Action="File" Source="src/cpuint.c" IsConfig="false" Hash="L3e6Af5pnSS+o6YQ/UWcvw" />
           <AcmeProjectActionInfo Action="File" Source="src/evsys.c" IsConfig="false" Hash="YRbYj+S5d06FYRiYTQ6gkg" />
           <AcmeProjectActionInfo Action="File" Source="src/protected_io.S" IsConfig="false" Hash="sgFkmFP7h1y8L07bVZahaQ" />
-          <AcmeProjectActionInfo Action="File" Source="src/rtc.c" IsConfig="false" Hash="Snre89+7wkivfOrxCHxYZg" />
+          <AcmeProjectActionInfo Action="File" Source="src/rtc.c" IsConfig="false" Hash="zCjSk+TEy+1kEiEi6ktyQg" />
           <AcmeProjectActionInfo Action="File" Source="src/slpctrl.c" IsConfig="false" Hash="VBh0So4ubflNKVaV5iWB8g" />
           <AcmeProjectActionInfo Action="File" Source="src/tca.c" IsConfig="false" Hash="lP0OYKQN1sSZDnx1FIHcJw" />
           <AcmeProjectActionInfo Action="File" Source="src/usart.c" IsConfig="false" Hash="gagplgkYB20aEJmWif02bQ" />
@@ -176,11 +176,13 @@
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
   <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.general.UseVprintfLibrary>True</avrgcc.linker.general.UseVprintfLibrary>
   <avrgcc.linker.libraries.Libraries>
     <ListValues>
       <Value>libm</Value>
     </ListValues>
   </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.miscellaneous.LinkerFlags>-lprintf_flt -lm</avrgcc.linker.miscellaneous.LinkerFlags>
   <avrgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>../Config</Value>

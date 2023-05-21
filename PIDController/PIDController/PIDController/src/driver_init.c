@@ -220,6 +220,18 @@ void system_init()
 {
 	mcu_init();
 
+	/* PORT setting on PB2 */
+
+	// Set pin direction to input
+	SW0_set_dir(PORT_DIR_IN);
+
+	SW0_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_UP);
+
 	CLKCTRL_init();
 
 	USART_3_initialization();

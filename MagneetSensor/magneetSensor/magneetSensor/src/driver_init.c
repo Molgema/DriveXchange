@@ -36,6 +36,148 @@
 #include "driver_init.h"
 #include <system.h>
 
+/* configure the pins and initialize the registers */
+void USART_3_initialization(void)
+{
+
+	// Set pin direction to input
+	PB1_set_dir(PORT_DIR_IN);
+
+	PB1_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
+
+	// Set pin direction to output
+
+	PB0_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PB0_set_dir(PORT_DIR_OUT);
+
+	USART_3_init();
+}
+
+void EVENT_SYSTEM_0_initialization(void)
+{
+
+	EVENT_SYSTEM_0_init();
+}
+
+/* Configure pins and initialize registers */
+void ADC_0_initialization(void)
+{
+
+	// Disable digital input buffer
+	PE3_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PE3_set_pull_mode(PORT_PULL_OFF);
+
+	ADC_0_init();
+}
+
+void TIMER_0_initialization(void)
+{
+
+	// Set pin direction to output
+
+	PC0_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC0_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC1_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC1_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC2_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC2_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC3_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC3_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC4_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC4_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC5_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC5_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	TIMER_0_init();
+}
+
 /**
  * \brief System initialization
  */
@@ -43,36 +185,32 @@ void system_init()
 {
 	mcu_init();
 
-	/* PORT setting on PB2 */
-
-	// Set pin direction to input
-	SW0_set_dir(PORT_DIR_IN);
-
-	SW0_set_pull_mode(
-	    // <y> Pull configuration
-	    // <id> pad_pull_config
-	    // <PORT_PULL_OFF"> Off
-	    // <PORT_PULL_UP"> Pull-up
-	    PORT_PULL_UP);
-
 	/* PORT setting on PB3 */
 
 	// Set pin direction to output
 
-	LED0_set_level(
+	LED_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
 	    // <false"> Low
 	    // <true"> High
 	    true);
 
-	LED0_set_dir(PORT_DIR_OUT);
+	LED_set_dir(PORT_DIR_OUT);
 
 	CLKCTRL_init();
+
+	USART_3_initialization();
+
+	EVENT_SYSTEM_0_initialization();
 
 	SLPCTRL_init();
 
 	CPUINT_init();
+
+	ADC_0_initialization();
+
+	TIMER_0_initialization();
 
 	RTC_0_init();
 
