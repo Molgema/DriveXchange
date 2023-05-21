@@ -89,6 +89,127 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
+  USART_3:
+    user_label: USART_3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART3::driver_config_definition::Asynchronous.Mode::Drivers:USART:Init
+    functionality: USART
+    api: Drivers:USART:Init
+    configuration:
+      baud_rate: 115200
+      ctrla_abeie: false
+      ctrla_dreie: false
+      ctrla_lbme: false
+      ctrla_rxcie: false
+      ctrla_rxsie: false
+      ctrla_txcie: false
+      ctrlb_mpcm: false
+      ctrlb_odme: false
+      ctrlb_rxen: false
+      ctrlb_rxmode: Normal mode
+      ctrlb_sfden: false
+      ctrlb_txen: true
+      ctrlc_chsize: 'Character size: 8 bit'
+      ctrlc_cmode: Asynchronous USART
+      ctrlc_pmode: No Parity
+      ctrlc_sbmode: 1 stop bit
+      ctrlc_ucpha: false
+      ctrlc_udord: false
+      dbgctrl_abmbp: false
+      dbgctrl_dbgrun: false
+      evctrl_irei: false
+      inc_isr_harness: false
+      rxplctrl_rxpl: 0
+      txplctrl_txpl: 0
+      usart_ctrla_rs485: RS485 Mode disabled
+    optional_signals: []
+    variant:
+      specification: CMODE=0
+      required_signals:
+      - name: USART3/RXD
+        pad: PB1
+        label: RXD
+      - name: USART3/TXD
+        pad: PB0
+        label: TXD
+    clocks:
+      domain_group:
+        nodes:
+        - name: USART
+          input: Main Clock (CLK_MAIN)
+          external: false
+          external_frequency: 0
+        configuration:
+          usart_clock_source: Main Clock (CLK_MAIN)
+  EVENT_SYSTEM_0:
+    user_label: EVENT_SYSTEM_0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::EVSYS::driver_config_definition::EVSYS::Drivers:EVSYS:Init
+    functionality: Event_System
+    api: Drivers:EVSYS:Init
+    configuration:
+      evsys_channel0_gen: Real Time Counter overflow
+      evsys_channel1_gen: 'Off'
+      evsys_channel2_gen: 'Off'
+      evsys_channel3_gen: 'Off'
+      evsys_channel4_gen: 'Off'
+      evsys_channel5_gen: 'Off'
+      evsys_channel6_gen: 'Off'
+      evsys_channel7_gen: 'Off'
+      evsys_channel8_gen: 'Off'
+      evsys_channel9_gen: 'Off'
+      evsys_user0_cclluta: 'Off'
+      evsys_user0_ccllutb: 'Off'
+      evsys_user0_opdisable: 'Off'
+      evsys_user0_opdrive: 'Off'
+      evsys_user0_opdump: 'Off'
+      evsys_user0_openable: 'Off'
+      evsys_user0_usart: 'Off'
+      evsys_user1_cclluta: 'Off'
+      evsys_user1_ccllutb: 'Off'
+      evsys_user1_opdisable: 'Off'
+      evsys_user1_opdrive: 'Off'
+      evsys_user1_opdump: 'Off'
+      evsys_user1_openable: 'Off'
+      evsys_user1_usart: 'Off'
+      evsys_user2_cclluta: 'Off'
+      evsys_user2_ccllutb: 'Off'
+      evsys_user2_opdisable: 'Off'
+      evsys_user2_opdrive: 'Off'
+      evsys_user2_opdump: 'Off'
+      evsys_user2_openable: 'Off'
+      evsys_user2_usart: 'Off'
+      evsys_user3_cclluta: 'Off'
+      evsys_user3_ccllutb: 'Off'
+      evsys_user3_usart: 'Off'
+      evsys_user4_cclluta: 'Off'
+      evsys_user4_ccllutb: 'Off'
+      evsys_user4_usart: 'Off'
+      evsys_user5_cclluta: 'Off'
+      evsys_user5_ccllutb: 'Off'
+      evsys_user_adc: Connect user to event channel 0
+      evsys_user_evouta: 'Off'
+      evsys_user_evoutb: 'Off'
+      evsys_user_evoutc: 'Off'
+      evsys_user_evoutd: 'Off'
+      evsys_user_evoute: 'Off'
+      evsys_user_evoutf: 'Off'
+      evsys_user_tca0_cnta: 'Off'
+      evsys_user_tca0_cntb: 'Off'
+      evsys_user_tca1_cnta: 'Off'
+      evsys_user_tca1_cntb: 'Off'
+      evsys_user_tcb0_capt: 'Off'
+      evsys_user_tcb0_count: 'Off'
+      evsys_user_tcb1_capt: 'Off'
+      evsys_user_tcb1_count: 'Off'
+      evsys_user_tcb2_capt: 'Off'
+      evsys_user_tcb2_count: 'Off'
+      evsys_user_tcb3_capt: 'Off'
+      evsys_user_tcb3_count: 'Off'
+      evsys_user_tcd0_inputa: 'Off'
+      evsys_user_tcd0_inputb: 'Off'
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group: null
   SLPCTRL:
     user_label: SLPCTRL
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::SLPCTRL::driver_config_definition::SLPCTRL::Drivers:SLPCTRL:Init
@@ -118,6 +239,142 @@ drivers:
     variant: null
     clocks:
       domain_group: null
+  ADC_0:
+    user_label: ADC_0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::ADC0::driver_config_definition::ADC::Drivers:ADC:Init
+    functionality: ADC
+    api: Drivers:ADC:Init
+    configuration:
+      adc_ctrla_convmode: Single Ended Mode Conversion
+      adc_ctrla_enable: true
+      adc_ctrla_freerun: false
+      adc_ctrla_leftadj: false
+      adc_ctrla_ressel: 12-bit mode
+      adc_ctrla_runstby: false
+      adc_ctrlb_sampnum: No accumulation
+      adc_ctrlc_presc: CLK_PER divided by 2
+      adc_ctrld_initdly: Delay 0 CLK_ADC cycles
+      adc_ctrld_sampdly: 0
+      adc_ctrle_wincm: No Window Comparison
+      adc_dbgctrl_dbgrun: false
+      adc_differential_mode: false
+      adc_evctrl_startei: true
+      adc_intctrl_resrdy: true
+      adc_intctrl_wcmp: false
+      adc_muxneg_muxneg: ADC input pin 0
+      adc_muxpos_muxpos: ADC input pin 11
+      adc_sampctrl_samplen: 0
+      adc_winht: 0
+      adc_winlt: 0
+      inc_isr_harness: false
+    optional_signals:
+    - identifier: ADC_0:AIN/11
+      pad: PE3
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::ADC0.AIN.11
+      name: ADC0/AIN/11
+      label: AIN/11
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: ADC
+          input: Main Clock (CLK_MAIN)
+          external: false
+          external_frequency: 0
+        configuration:
+          adc_clock_source: Main Clock (CLK_MAIN)
+  TIMER_0:
+    user_label: TIMER_0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::TCA0::driver_config_definition::Split.Mode::Drivers:TCA:Init
+    functionality: Timer
+    api: Drivers:TCA:Init
+    configuration:
+      inc_isr_harness: false
+      tca_ctrla_clksel: System Clock
+      tca_ctrla_enable: true
+      tca_ctrlb_hcmp0en: true
+      tca_ctrlb_hcmp1en: true
+      tca_ctrlb_hcmp2en: true
+      tca_ctrlb_lcmp0en: true
+      tca_ctrlb_lcmp1en: true
+      tca_ctrlb_lcmp2en: true
+      tca_ctrlc_hcmp0ov: false
+      tca_ctrlc_hcmp1ov: false
+      tca_ctrlc_hcmp2ov: false
+      tca_ctrlc_lcmp0ov: false
+      tca_ctrlc_lcmp1ov: false
+      tca_ctrlc_lcmp2ov: false
+      tca_dbgctrl_dbgrun: false
+      tca_hcmp0: 0
+      tca_hcmp1: 0
+      tca_hcmp2: 0
+      tca_hcnt: 0
+      tca_hper: 255
+      tca_intctrl_hunf: false
+      tca_intctrl_lcmp0: false
+      tca_intctrl_lcmp1: false
+      tca_intctrl_lcmp2: false
+      tca_intctrl_lunf: false
+      tca_lcmp0: 0
+      tca_lcmp1: 0
+      tca_lcmp2: 0
+      tca_lcnt: 0
+      tca_lper: 255
+    optional_signals:
+    - identifier: TIMER_0:WO/0
+      pad: PC0
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.0
+      name: TCA0/WO/0
+      label: WO/0
+    - identifier: TIMER_0:WO/1
+      pad: PC1
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.1
+      name: TCA0/WO/1
+      label: WO/1
+    - identifier: TIMER_0:WO/2
+      pad: PC2
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.2
+      name: TCA0/WO/2
+      label: WO/2
+    - identifier: TIMER_0:WO/3
+      pad: PC3
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.3
+      name: TCA0/WO/3
+      label: WO/3
+    - identifier: TIMER_0:WO/4
+      pad: PC4
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.4
+      name: TCA0/WO/4
+      label: WO/4
+    - identifier: TIMER_0:WO/5
+      pad: PC5
+      mode: Enabled
+      configuration: null
+      definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::optional_signal_definition::TCA0.WO.5
+      name: TCA0/WO/5
+      label: WO/5
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TCA
+          input: Main Clock (CLK_MAIN)
+          external: false
+          external_frequency: 0
+        configuration:
+          tca_clock_source: Main Clock (CLK_MAIN)
   RTC_0:
     user_label: RTC_0
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::RTC::driver_config_definition::RTC::Drivers:RTC:Init
@@ -139,8 +396,8 @@ drivers:
       rtc_ctrla_runstdby: false
       rtc_dbgctrl_dbgrun: false
       rtc_intctrl_cmp: false
-      rtc_intctrl_ovf: true
-      rtc_per: 128
+      rtc_intctrl_ovf: false
+      rtc_per: 28
       rtc_pitctrla_period: 'Off'
       rtc_pitctrla_piten: false
       rtc_pitdbgctrl_dbgrun: false
@@ -172,21 +429,75 @@ drivers:
     clocks:
       domain_group: null
 pads:
-  SW0:
-    name: PB2
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB2
+  PB0:
+    name: PB0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB0
+    mode: Digital output
+    user_label: PB0
+    configuration: null
+  PB1:
+    name: PB1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB1
     mode: Digital input
-    user_label: SW0
-    configuration:
-      pad_pull_config: Pull-up
-  LED0:
+    user_label: PB1
+    configuration: null
+  LED:
     name: PB3
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB3
     mode: Digital output
-    user_label: LED0
+    user_label: LED
     configuration:
       pad_initial_level: High
+  PC0:
+    name: PC0
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC0
+    mode: Digital output
+    user_label: PC0
+    configuration: null
+  PC1:
+    name: PC1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC1
+    mode: Digital output
+    user_label: PC1
+    configuration: null
+  PC2:
+    name: PC2
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC2
+    mode: Digital output
+    user_label: PC2
+    configuration: null
+  PC3:
+    name: PC3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC3
+    mode: Digital output
+    user_label: PC3
+    configuration: null
+  PC4:
+    name: PC4
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC4
+    mode: Digital output
+    user_label: PC4
+    configuration: null
+  PC5:
+    name: PC5
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PC5
+    mode: Digital output
+    user_label: PC5
+    configuration: null
+  PE3:
+    name: PE3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PE3
+    mode: Analog
+    user_label: PE3
+    configuration: null
 toolchain_options:
+- definition:
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.xc8:7.0.0
+  configuration:
+    compiler_config:
+      xc8_compiler_miscellaneous_OtherFlags: -std=gnu99
+    linker_config:
+      xc8_linker_miscellaneous_LinkerFlags: ''
 - definition:
     identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
   configuration:
@@ -201,11 +512,4 @@ toolchain_options:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
     linker_config:
       avrgcc_linker_miscellaneous_LinkerFlags: ''
-- definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.xc8:7.0.0
-  configuration:
-    compiler_config:
-      xc8_compiler_miscellaneous_OtherFlags: -std=gnu99
-    linker_config:
-      xc8_linker_miscellaneous_LinkerFlags: ''
 static_files: []

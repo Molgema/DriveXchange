@@ -102,6 +102,21 @@ void TIMER_0_initialization(void)
 
 	// Set pin direction to output
 
+	PC1_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC1_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
 	PC2_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
@@ -110,6 +125,51 @@ void TIMER_0_initialization(void)
 	    false);
 
 	PC2_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC3_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC3_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC4_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC4_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.TCAROUTEA |= PORTMUX_TCA01_bm;
+
+	// Set pin direction to output
+
+	PC5_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PC5_set_dir(PORT_DIR_OUT);
 
 	/* set the alternate pin mux */
 
@@ -125,18 +185,18 @@ void system_init()
 {
 	mcu_init();
 
-	/* PORT setting on PE2 */
+	/* PORT setting on PB3 */
 
 	// Set pin direction to output
 
-	LED0_set_level(
+	LED_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
 	    // <false"> Low
 	    // <true"> High
-	    false);
+	    true);
 
-	LED0_set_dir(PORT_DIR_OUT);
+	LED_set_dir(PORT_DIR_OUT);
 
 	CLKCTRL_init();
 

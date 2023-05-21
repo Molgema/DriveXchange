@@ -54,14 +54,14 @@ int8_t RTC_0_init()
 	            | 1 << RTC_RTCEN_bp     /* Enable: enabled */
 	            | 0 << RTC_RUNSTDBY_bp; /* Run In Standby: disabled */
 
-	RTC.PER = 0x80; /* Period: 0x80 */
+	RTC.PER = 0x1c; /* Period: 0x1c */
 
 	RTC.CLKSEL = RTC_CLKSEL_OSC32K_gc; /* Internal 32.768 kHz oscillator */
 
 	// RTC.DBGCTRL = 0 << RTC_DBGRUN_bp; /* Run in debug: disabled */
 
-	RTC.INTCTRL = 0 << RTC_CMP_bp    /* Compare Match Interrupt enable: disabled */
-	              | 1 << RTC_OVF_bp; /* Overflow Interrupt enable: enabled */
+	// RTC.INTCTRL = 0 << RTC_CMP_bp /* Compare Match Interrupt enable: disabled */
+	//		 | 0 << RTC_OVF_bp; /* Overflow Interrupt enable: disabled */
 
 	// RTC.PITCTRLA = RTC_PERIOD_OFF_gc /* Off */
 	//		 | 0 << RTC_PITEN_bp; /* Enable: disabled */
