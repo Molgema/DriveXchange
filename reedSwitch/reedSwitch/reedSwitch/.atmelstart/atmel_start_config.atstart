@@ -89,115 +89,13 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
-  USART_2:
-    user_label: USART_2
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART2::driver_config_definition::Asynchronous.Mode::Drivers:USART:Init
-    functionality: USART
-    api: Drivers:USART:Init
-    configuration:
-      baud_rate: 9600
-      ctrla_abeie: false
-      ctrla_dreie: false
-      ctrla_lbme: false
-      ctrla_rxcie: false
-      ctrla_rxsie: false
-      ctrla_txcie: false
-      ctrlb_mpcm: false
-      ctrlb_odme: false
-      ctrlb_rxen: true
-      ctrlb_rxmode: Normal mode
-      ctrlb_sfden: false
-      ctrlb_txen: true
-      ctrlc_chsize: 'Character size: 8 bit'
-      ctrlc_cmode: Asynchronous USART
-      ctrlc_pmode: No Parity
-      ctrlc_sbmode: 1 stop bit
-      ctrlc_ucpha: false
-      ctrlc_udord: false
-      dbgctrl_abmbp: false
-      dbgctrl_dbgrun: false
-      evctrl_irei: false
-      inc_isr_harness: false
-      rxplctrl_rxpl: 0
-      txplctrl_txpl: 0
-      usart_ctrla_rs485: RS485 Mode disabled
-    optional_signals: []
-    variant:
-      specification: CMODE=0
-      required_signals:
-      - name: USART2/RXD
-        pad: PF1
-        label: RXD
-      - name: USART2/TXD
-        pad: PF0
-        label: TXD
-    clocks:
-      domain_group:
-        nodes:
-        - name: USART
-          input: Main Clock (CLK_MAIN)
-          external: false
-          external_frequency: 0
-        configuration:
-          usart_clock_source: Main Clock (CLK_MAIN)
-  USART_3:
-    user_label: USART_3
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::USART3::driver_config_definition::Asynchronous.Mode::Drivers:USART:Init
-    functionality: USART
-    api: Drivers:USART:Init
-    configuration:
-      baud_rate: 115200
-      ctrla_abeie: false
-      ctrla_dreie: false
-      ctrla_lbme: false
-      ctrla_rxcie: false
-      ctrla_rxsie: false
-      ctrla_txcie: false
-      ctrlb_mpcm: false
-      ctrlb_odme: false
-      ctrlb_rxen: true
-      ctrlb_rxmode: Normal mode
-      ctrlb_sfden: false
-      ctrlb_txen: true
-      ctrlc_chsize: 'Character size: 8 bit'
-      ctrlc_cmode: Asynchronous USART
-      ctrlc_pmode: No Parity
-      ctrlc_sbmode: 1 stop bit
-      ctrlc_ucpha: false
-      ctrlc_udord: false
-      dbgctrl_abmbp: false
-      dbgctrl_dbgrun: false
-      evctrl_irei: false
-      inc_isr_harness: false
-      rxplctrl_rxpl: 0
-      txplctrl_txpl: 0
-      usart_ctrla_rs485: RS485 Mode disabled
-    optional_signals: []
-    variant:
-      specification: CMODE=0
-      required_signals:
-      - name: USART3/RXD
-        pad: PB1
-        label: RXD
-      - name: USART3/TXD
-        pad: PB0
-        label: TXD
-    clocks:
-      domain_group:
-        nodes:
-        - name: USART
-          input: Main Clock (CLK_MAIN)
-          external: false
-          external_frequency: 0
-        configuration:
-          usart_clock_source: Main Clock (CLK_MAIN)
   SLPCTRL:
     user_label: SLPCTRL
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::SLPCTRL::driver_config_definition::SLPCTRL::Drivers:SLPCTRL:Init
     functionality: System
     api: Drivers:SLPCTRL:Init
     configuration:
-      slpctrl_ctrla_sen: false
+      slpctrl_ctrla_sen: true
       slpctrl_ctrla_smode: Idle mode
     optional_signals: []
     variant: null
@@ -212,7 +110,7 @@ drivers:
       cpuint_ctrla_cvt: false
       cpuint_ctrla_ivsel: false
       cpuint_ctrla_lvl0rr: false
-      cpuint_global_interrupt: false
+      cpuint_global_interrupt: true
       cpuint_lvl0pri_lvl0pri: 0
       cpuint_lvl1vec_lvl1vec: 0
       inc_isr_harness: false
@@ -220,44 +118,6 @@ drivers:
     variant: null
     clocks:
       domain_group: null
-  RTC_0:
-    user_label: RTC_0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::RTC::driver_config_definition::RTC::Drivers:RTC:Init
-    functionality: RTC
-    api: Drivers:RTC:Init
-    configuration:
-      $input: 32768
-      $input_id: Internal 32.768 kHz oscillator
-      RESERVED_InputFreq: 32768
-      RESERVED_InputFreq_id: Internal 32.768 kHz oscillator
-      _$freq_output_RTC Clock (CLK_RTC): 1024
-      enable_rtc: true
-      inc_isr_harness: false
-      rtc_clksel_clksel: Internal 32.768 kHz oscillator
-      rtc_cmp: 0
-      rtc_cnt: 0
-      rtc_ctrla_prescaler: '32'
-      rtc_ctrla_rtcen: false
-      rtc_ctrla_runstdby: false
-      rtc_dbgctrl_dbgrun: false
-      rtc_intctrl_cmp: false
-      rtc_intctrl_ovf: true
-      rtc_per: 128
-      rtc_pitctrla_period: 'Off'
-      rtc_pitctrla_piten: false
-      rtc_pitdbgctrl_dbgrun: false
-      rtc_pitintctrl_pi: false
-    optional_signals: []
-    variant: null
-    clocks:
-      domain_group:
-        nodes:
-        - name: RTC
-          input: RTC Clock (CLK_RTC)
-          external: false
-          external_frequency: 0
-        configuration:
-          rtc_clock_source: RTC Clock (CLK_RTC)
   BOD:
     user_label: BOD
     definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::BOD::driver_config_definition::BOD::Drivers:BOD:Init
@@ -274,40 +134,43 @@ drivers:
     clocks:
       domain_group: null
 pads:
-  PB0:
-    name: PB0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB0
-    mode: Digital output
-    user_label: PB0
-    configuration: null
-  PB1:
-    name: PB1
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB1
+  SW0:
+    name: PB2
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB2
     mode: Digital input
-    user_label: PB1
-    configuration: null
-  PF0:
-    name: PF0
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PF0
+    user_label: SW0
+    configuration:
+      pad_pull_config: Pull-up
+  LED0:
+    name: PB3
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PB3
     mode: Digital output
-    user_label: PF0
-    configuration: null
-  PF1:
-    name: PF1
-    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PF1
+    user_label: LED0
+    configuration:
+      pad_initial_level: High
+  REED2:
+    name: PE1
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PE1
     mode: Digital input
-    user_label: PF1
+    user_label: REED2
+    configuration:
+      pad_pull_config: 'Off'
+  REED1:
+    name: PE2
+    definition: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::pad::PE2
+    mode: Digital input
+    user_label: REED1
     configuration: null
 toolchain_options:
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99
     linker_config:
       avrgcc_linker_miscellaneous_LinkerFlags: ''
 - definition:
-    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Atmel.Studio:7.0.0
+    identifier: Microchip:AVRDB_48_drivers:1.0.0::AVR128DB48::environment_definition::All:Microchip.Studio.gcc:7.0.0
   configuration:
     compiler_config:
       avrgcc_compiler_miscellaneous_OtherFlags: -std=gnu99

@@ -199,9 +199,9 @@ void calcPos(volatile double* valueSensor, size_t length)
 	
 	for (size_t i = 0; i < 8; i++)
 	{	
-		if (valueSensor[i] < 200) detLine = true;
+		if (valueSensor[i] < 750) detLine = true;
 		
-		if (valueSensor[i] < 50) 
+		if (valueSensor[i] < 700) 
 		{
 			avgSum += (valueSensor[i])*(i*1000.0);
 			avg += valueSensor[i];
@@ -246,6 +246,7 @@ PIDControl ()
 	{
 		normalizeSensors(normArr, sensorArr, minSensor, maxSensor, NUM_SENSORS);
 		calcPos(normArr, NUM_SENSORS);
+		motorCtrl(); 
 	
 		sensorPos = 0;
 		send_flag = 2;
@@ -291,8 +292,6 @@ int main(void)
 		calSens(); 
 		
 		PIDControl();
-		
-		motorCtrl(); 
 		
 		if (send_flag == 1) {
 			

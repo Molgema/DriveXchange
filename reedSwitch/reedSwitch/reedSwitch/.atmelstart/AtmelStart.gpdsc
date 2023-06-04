@@ -43,9 +43,7 @@
         <file category="doc" condition="GCC, XC8, IAR" name="modules/bod/doc/bod.rst"/>
         <file category="doc" condition="GCC, XC8, IAR" name="modules/clkctrl/doc/clkctrl.rst"/>
         <file category="doc" condition="GCC, XC8, IAR" name="modules/cpuint/doc/cpuint.rst"/>
-        <file category="doc" condition="GCC, XC8, IAR" name="modules/rtc/doc/rtc.rst"/>
         <file category="doc" condition="GCC, XC8, IAR" name="modules/slpctrl/doc/slpctrl.rst"/>
-        <file category="doc" condition="GCC, XC8, IAR" name="modules/usart/doc/usart.rst"/>
         <file category="source" condition="GCC, XC8, IAR" name="main.c"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/driver_init.c"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/driver_init.h"/>
@@ -54,10 +52,7 @@
         <file category="other" condition="GCC, XC8, IAR" name="doxygen/mainpage.dox"/>
         <file category="other" condition="GCC, XC8, IAR" name="doxygen/generator/doxyfile.doxygen"/>
         <file category="other" condition="GCC, XC8, IAR" name="doxygen/generator/DoxygenLayout.xml"/>
-        <file category="other" condition="GCC, XC8, IAR" name="doxygen/rtc.dox"/>
         <file category="other" condition="GCC, XC8, IAR" name="doxygen/system.dox"/>
-        <file category="other" condition="GCC, XC8, IAR" name="doxygen/usart.dox"/>
-        <file category="other" condition="GCC, XC8, IAR" name="doxygen/usart_init.dox"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/bod.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/ccp.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/clkctrl.h"/>
@@ -65,17 +60,13 @@
         <file category="header" condition="GCC, XC8, IAR" name="include/port.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/protected_io.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/rstctrl.h"/>
-        <file category="header" condition="GCC, XC8, IAR" name="include/rtc.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/slpctrl.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="include/system.h"/>
-        <file category="header" condition="GCC, XC8, IAR" name="include/usart.h"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/bod.c"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/clkctrl.c"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/cpuint.c"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/protected_io.S"/>
-        <file category="source" condition="GCC, XC8, IAR" name="src/rtc.c"/>
         <file category="source" condition="GCC, XC8, IAR" name="src/slpctrl.c"/>
-        <file category="source" condition="GCC, XC8, IAR" name="src/usart.c"/>
         <file category="header" condition="GCC, XC8, IAR" name="utils/assembler.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="utils/assembler/gas.h"/>
         <file category="header" condition="GCC, XC8, IAR" name="utils/assembler/iar.h"/>
