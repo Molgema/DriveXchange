@@ -36,7 +36,12 @@ extern "C" {
 #endif
 
 /* Normal Mode, Baud register value */
-#define USART3_BAUD_RATE(BAUD_RATE) ((float)(4000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
+#define USART2_BAUD_RATE(BAUD_RATE) ((float)(24000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
+
+int8_t USART_2_init();
+
+/* Normal Mode, Baud register value */
+#define USART3_BAUD_RATE(BAUD_RATE) ((float)(24000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
 int8_t USART_3_init();
 

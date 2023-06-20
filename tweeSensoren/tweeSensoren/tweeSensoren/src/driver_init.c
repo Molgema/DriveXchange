@@ -37,6 +37,42 @@
 #include <system.h>
 
 /* configure the pins and initialize the registers */
+void USART_2_initialization(void)
+{
+
+	// Set pin direction to input
+	PF5_set_dir(PORT_DIR_IN);
+
+	PF5_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
+
+	// Set pin direction to output
+
+	PF4_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	PF4_set_dir(PORT_DIR_OUT);
+
+	/* set the alternate pin mux */
+
+	PORTMUX.USARTROUTEA |= PORTMUX_USART20_bm;
+
+	USART_2_init();
+}
+
+/* configure the pins and initialize the registers */
 void USART_3_initialization(void)
 {
 
@@ -75,14 +111,49 @@ void ADC_0_initialization(void)
 {
 
 	// Disable digital input buffer
+	PD0_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD0_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
+	PD1_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD1_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
+	PD2_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD2_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
 	PD3_set_isc(PORT_ISC_INPUT_DISABLE_gc);
 	// Disable pull-up resistor
 	PD3_set_pull_mode(PORT_PULL_OFF);
 
 	// Disable digital input buffer
+	PD4_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD4_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
+	PD5_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD5_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
 	PD6_set_isc(PORT_ISC_INPUT_DISABLE_gc);
 	// Disable pull-up resistor
 	PD6_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
+	PD7_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PD7_set_pull_mode(PORT_PULL_OFF);
+
+	// Disable digital input buffer
+	PE3_set_isc(PORT_ISC_INPUT_DISABLE_gc);
+	// Disable pull-up resistor
+	PE3_set_pull_mode(PORT_PULL_OFF);
 
 	ADC_0_init();
 }
@@ -190,7 +261,58 @@ void system_init()
 {
 	mcu_init();
 
+	/* PORT setting on PB2 */
+
+	// Set pin direction to input
+	SW0_set_dir(PORT_DIR_IN);
+
+	SW0_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_UP);
+
+	/* PORT setting on PB3 */
+
+	// Set pin direction to output
+
+	LED0_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    true);
+
+	LED0_set_dir(PORT_DIR_OUT);
+
+	/* PORT setting on PE1 */
+
+	// Set pin direction to input
+	REED2_set_dir(PORT_DIR_IN);
+
+	REED2_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
+
+	/* PORT setting on PE2 */
+
+	// Set pin direction to input
+	REED1_set_dir(PORT_DIR_IN);
+
+	REED1_set_pull_mode(
+	    // <y> Pull configuration
+	    // <id> pad_pull_config
+	    // <PORT_PULL_OFF"> Off
+	    // <PORT_PULL_UP"> Pull-up
+	    PORT_PULL_OFF);
+
 	CLKCTRL_init();
+
+	USART_2_initialization();
 
 	USART_3_initialization();
 

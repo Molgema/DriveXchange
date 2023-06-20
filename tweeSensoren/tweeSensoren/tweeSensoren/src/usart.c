@@ -42,6 +42,47 @@
  *
  * \return Initialization status.
  */
+int8_t USART_2_init()
+{
+
+	USART2.BAUD = (uint16_t)USART2_BAUD_RATE(9600); /* set baud rate register */
+
+	// USART2.CTRLA = 0 << USART_ABEIE_bp /* Auto-baud Error Interrupt Enable: disabled */
+	//		 | 0 << USART_DREIE_bp /* Data Register Empty Interrupt Enable: disabled */
+	//		 | 0 << USART_LBME_bp /* Loop-back Mode Enable: disabled */
+	//		 | USART_RS485_DISABLE_gc /* RS485 Mode disabled */
+	//		 | 0 << USART_RXCIE_bp /* Receive Complete Interrupt Enable: disabled */
+	//		 | 0 << USART_RXSIE_bp /* Receiver Start Frame Interrupt Enable: disabled */
+	//		 | 0 << USART_TXCIE_bp; /* Transmit Complete Interrupt Enable: disabled */
+
+	USART2.CTRLB = 0 << USART_MPCM_bp       /* Multi-processor Communication Mode: disabled */
+	               | 0 << USART_ODME_bp     /* Open Drain Mode Enable: disabled */
+	               | 1 << USART_RXEN_bp     /* Receiver Enable: enabled */
+	               | USART_RXMODE_NORMAL_gc /* Normal mode */
+	               | 0 << USART_SFDEN_bp    /* Start Frame Detection Enable: disabled */
+	               | 1 << USART_TXEN_bp;    /* Transmitter Enable: enabled */
+
+	// USART2.CTRLC = USART_CMODE_ASYNCHRONOUS_gc /* Asynchronous Mode */
+	//		 | USART_CHSIZE_8BIT_gc /* Character size: 8 bit */
+	//		 | USART_PMODE_DISABLED_gc /* No Parity */
+	//		 | USART_SBMODE_1BIT_gc; /* 1 stop bit */
+
+	// USART2.DBGCTRL = 0 << USART_DBGRUN_bp; /* Debug Run: disabled */
+
+	// USART2.EVCTRL = 0 << USART_IREI_bp; /* IrDA Event Input Enable: disabled */
+
+	// USART2.RXPLCTRL = 0x0 << USART_RXPL_gp; /* Receiver Pulse Lenght: 0x0 */
+
+	// USART2.TXPLCTRL = 0x0 << USART_TXPL_gp; /* Transmit pulse length: 0x0 */
+
+	return 0;
+}
+
+/**
+ * \brief Initialize usart interface
+ *
+ * \return Initialization status.
+ */
 int8_t USART_3_init()
 {
 

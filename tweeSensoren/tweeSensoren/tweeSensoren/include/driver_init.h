@@ -45,6 +45,8 @@
 
 #include <usart.h>
 
+#include <usart.h>
+
 #include <evsys.h>
 #include <slpctrl.h>
 #include <cpuint.h>

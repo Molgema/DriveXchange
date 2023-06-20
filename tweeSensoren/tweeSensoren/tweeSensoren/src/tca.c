@@ -87,7 +87,7 @@ int8_t TIMER_0_init()
 
 	// TCA0.SPLIT.DBGCTRL = 0 << TCA_SPLIT_DBGRUN_bp; /* Debug Run: disabled */
 
-	TCA0.SPLIT.CTRLA = TCA_SPLIT_CLKSEL_DIV1_gc /* System Clock */
+	TCA0.SPLIT.CTRLA = TCA_SPLIT_CLKSEL_DIV4_gc /* System Clock / 4 */
 	                   | 1 << TCA_SPLIT_ENABLE_bp /* Module Enable: enabled */;
 
 	return 0;
