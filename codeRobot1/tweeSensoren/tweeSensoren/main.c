@@ -289,7 +289,9 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		
 	    case HEFFEN:
 		TCA0.SPLIT.HCMP0 = (255);
+		TCA0.SPLIT.HCMP1 = (255);
 		TCA0.SPLIT.LCMP1 = 0;
+		TCA0.SPLIT.HCMP2 = 0;
 	
 		if (reed2_flag == 1)
 		{
@@ -308,11 +310,15 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		TCA0.SPLIT.LCMP2 = 0;
 		
 		TCA0.SPLIT.HCMP0 = (0);
+		TCA0.SPLIT.HCMP1 = (0);
 		TCA0.SPLIT.LCMP1 = (255);
+		TCA0.SPLIT.HCMP2 = (255);
 		
 		_delay_ms(6600);
-		TCA0.SPLIT.LCMP1 = (0);
 		TCA0.SPLIT.HCMP0 = (0);
+		TCA0.SPLIT.HCMP1 = (0);
+		TCA0.SPLIT.LCMP1 = (0);
+		TCA0.SPLIT.LCMP2 = (0);
 		motorState = NAMAGNEET;
 		
 		break;

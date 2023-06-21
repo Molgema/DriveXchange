@@ -17,7 +17,8 @@ volatile uint16_t avg_Len = 0; //gemiddelde van de samples
 //Initialisatie van variabelen voor implementeren delay tussen versturen puls en ontvangen puls
 volatile unsigned int send_flag = 0; //flag voor sturen van puls
 volatile unsigned int timer_flag = 0; //flag voor wanneer data weer ontvangen moet worden
-volatile unsigned int countAS = 0; //counter voor US100 geeft sample rate van uitlezing (vb voor counter = 3 geeft 32768/(128*3)= 85.33 samples per seconde) 
+volatile unsigned int countAS = 0; //counter voor US100 geeft sample rate van uitlezing (vb voor counter = 3 geeft 32768/(128*3)= 85.33 samples per seconde)
+volatile unsigned int countRead = 0;  
 
 //Variabele voor weergeven data via USART3
 char buffer[24]; //buffer voor testen van uitlezing van US-100
@@ -29,6 +30,7 @@ ISR (ADC0_RESRDY_vect) {
 	
 	if (send_flag) {
 		countAS++; //counter wordt opgeteld zodra puls is verstuurd
+		countRead++; 
 	}
 	
 	ADC0.INTFLAGS = ADC_RESRDY_bm;
@@ -78,12 +80,12 @@ void FlushReceiver ( )
 }
 
 void ControlLED (volatile uint16_t dist) {
-	if (dist <= 200) {
-		LED0_set_level(true);
-	}
-	else {
+	if ((countRead >= 2560) && (dist <= 200)) {
 		LED0_set_level(false);
 	}
+// 	else {
+// 		LED0_set_level(false);
+// 	}
 }
 
 /*Gets the distance data from the US-100 and then displays it through USART3 */
@@ -111,7 +113,7 @@ void GetDistance ()
 // 			sum_Len = 0;
 // 		}
 		
-		if ((Len_mm >= 20) && (Len_mm <= 500)) {
+		if ((Len_mm >= 0) && (Len_mm <= 500)) {
 			sprintf(buffer, "%d\n", Len_mm);
 			USART3_sendString(buffer);
 		}
