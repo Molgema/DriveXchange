@@ -1,3 +1,4 @@
+//robot 2
 #include <atmel_start.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
@@ -58,11 +59,11 @@ ISR (PORTE_PORT_vect) {
 			reed2_flag = 1;
 	}	
 	
-	if (motorState == WACHTEN) {
-		
-		reed1_flag = 1;
-		reed2_flag = 0;
-	}
+// 	if (motorState == WACHTEN) {
+// 		
+// 		reed1_flag = 1;
+// 		reed2_flag = 0;
+// 	}
 // 		}
 // 		
 // 	}
@@ -234,10 +235,10 @@ void GetDistance ()
 		// 			sum_Len = 0;
 		// 		}
 		
-		if ((Len_mm >= 20) && (Len_mm <= 500)) {
-			sprintf(buffer, "%d\n", Len_mm);
-			USART3_sendString(buffer);
-		}
+// 		if ((Len_mm >= 20) && (Len_mm <= 500)) {
+// 			sprintf(buffer, "%d\n", Len_mm);
+// 			USART3_sendString(buffer);
+// 		}
 		
 		if ((countRead >= 2560) && (Len_mm <= 130)){
 			motorState = START;
@@ -256,9 +257,7 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 
 
     switch (motorState) {
-		case START:
-		//TCA0.SPLIT.HCMP2 = 0;
-		
+		case START:		
 		TCA0.SPLIT.LCMP0 = 0;
 		TCA0.SPLIT.LCMP2 = 0;
 		LED0_set_level(1);
@@ -283,16 +282,21 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		}
 		TCA0.SPLIT.LCMP0 = ((270-(IR0 + IR1 + IR2 + IR3)/4));
 		TCA0.SPLIT.LCMP2 = ((270-(IR4 + IR5 + IR6 + IR7)/4));
+		//TCA0.SPLIT.LCMP0 = ((IR0 + IR1 + IR2 + IR3)/4)-230;
+		//TCA0.SPLIT.LCMP2 = ((IR4 + IR5 + IR6 + IR7)/4)-230;
 		LED0_set_level(0);
 		break;
 		
 		
 	    case HEFFEN:
-		TCA0.SPLIT.HCMP0 = (255);
+		TCA0.SPLIT.HCMP0 = 255;
 		TCA0.SPLIT.LCMP1 = 0;
 	
 		if (reed2_flag == 1)
 		{
+// 			TCA0.SPLIT.HCMP0 = 0;
+// 			TCA0.SPLIT.LCMP1 = 0;
+			//_delay_ms(2000);
 			motorState = WACHTEN;
 	
 		}
@@ -307,10 +311,10 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		TCA0.SPLIT.LCMP0 = 0;
 		TCA0.SPLIT.LCMP2 = 0;
 		
-		TCA0.SPLIT.HCMP0 = (0);
-		TCA0.SPLIT.LCMP1 = (255);
+		TCA0.SPLIT.HCMP0 = 0;
+		TCA0.SPLIT.LCMP1 = 255;
 		
-		_delay_ms(6600);
+		_delay_ms(5250);
 		TCA0.SPLIT.LCMP1 = (0);
 		TCA0.SPLIT.HCMP0 = (0);
 		motorState = NAMAGNEET;
@@ -319,8 +323,10 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		
 		case NAMAGNEET:
 		
-		TCA0.SPLIT.LCMP0 = ((260-(IR0 + IR1 + IR2 + IR3)/4));
+ 		TCA0.SPLIT.LCMP0 = ((260-(IR0 + IR1 + IR2 + IR3)/4));
 		TCA0.SPLIT.LCMP2 = ((260 -(IR4 + IR5 + IR6 + IR7)/4));
+//		TCA0.SPLIT.LCMP0 = ((IR0 + IR1 + IR2 + IR3)/4)-230;
+//		TCA0.SPLIT.LCMP2 = ((IR4 + IR5 + IR6 + IR7)/4)-230;
 		LED0_set_level(0);
 		
 		timerAS();

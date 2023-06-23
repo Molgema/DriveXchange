@@ -21,14 +21,20 @@ int main(void)
 // 		L_toggle_level(); 
 // 		_delay_ms(500);
 // 		L_toggle_level();
-		
-		if (switch_flag) {
-			//L_set_level(0);
-			TCA0.SPLIT.HCMP0 = 255; 
+		if (!SW0_get_level())
+		{
+			//TCA0.SPLIT.HCMP0  = 200; //omlaag voor robot 2
+			//TCA0.SPLIT.HCMP1  = 150; not
+			TCA0.SPLIT.LCMP1  = 200; //omhoog voor robot 2
+			//TCA0.SPLIT.HCMP2  = 255; not
 		}
 		else {
-			TCA0.SPLIT.HCMP0 = 0;  
+			//TCA0.SPLIT.HCMP0 = 0;
+			//TCA0.SPLIT.HCMP1  = 0; not 
+			TCA0.SPLIT.LCMP1  = 0;
+			//TCA0.SPLIT.HCMP2  = 0; not
 		}
+	
 		
 	}
 }

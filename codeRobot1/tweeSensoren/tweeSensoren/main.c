@@ -1,3 +1,4 @@
+//robot 1
 #include <atmel_start.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
@@ -49,32 +50,33 @@ volatile unsigned int reed2_flag = 0;
 
 
 ISR (PORTE_PORT_vect) {
-// 	if (motorState == HEFFEN) {
-// 		_delay_ms(50); 
-		
-/*		if (!REED1_get_level()) {*/
 	if (motorState == HEFFEN) {
+		_delay_ms(50); 
+		
+		if (!REED1_get_level()) {
+// 	if (motorState == HEFFEN) {
 			reed1_flag = 0;
 			reed2_flag = 1;
-	}	
-	
-	if (motorState == WACHTEN) {
-		
-		reed1_flag = 1;
-		reed2_flag = 0;
+		}
 	}
+	
+// 	if (motorState == WACHTEN) {
+// 		
+// 		reed1_flag = 1;
+// 		reed2_flag = 0;
+// 	}
 // 		}
 // 		
 // 	}
 	
-// 	if (motorState == WACHTEN) {
-// 		_delay_ms(50);
+	if (motorState == WACHTEN) {
+		_delay_ms(50);
 		
-/*		if (!REED2_get_level()) {*/
-// 			reed1_flag = 0;
-// 			reed2_flag = 1;
-// 		}
-// 	}	
+		if (!REED2_get_level()) {
+ 			reed1_flag = 1;
+ 			reed2_flag = 0;
+ 		}
+	}	
 
 	
 	
@@ -288,13 +290,15 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		
 		
 	    case HEFFEN:
-		TCA0.SPLIT.HCMP0 = (255);
-		TCA0.SPLIT.HCMP1 = (255);
-		TCA0.SPLIT.LCMP1 = 0;
-		TCA0.SPLIT.HCMP2 = 0;
+		TCA0.SPLIT.HCMP0 = 0;
+		TCA0.SPLIT.LCMP1 = 255;
 	
 		if (reed2_flag == 1)
 		{
+			reed2_flag = 0; 
+			TCA0.SPLIT.HCMP0 = (0);
+			TCA0.SPLIT.LCMP1 = (0);
+			_delay_ms(2500);
 			motorState = WACHTEN;
 	
 		}
@@ -309,17 +313,18 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		TCA0.SPLIT.LCMP0 = 0;
 		TCA0.SPLIT.LCMP2 = 0;
 		
-		TCA0.SPLIT.HCMP0 = (0);
-		TCA0.SPLIT.HCMP1 = (0);
-		TCA0.SPLIT.LCMP1 = (255);
-		TCA0.SPLIT.HCMP2 = (255);
-		
-		_delay_ms(6600);
-		TCA0.SPLIT.HCMP0 = (0);
-		TCA0.SPLIT.HCMP1 = (0);
+		TCA0.SPLIT.HCMP0 = (255);
 		TCA0.SPLIT.LCMP1 = (0);
-		TCA0.SPLIT.LCMP2 = (0);
-		motorState = NAMAGNEET;
+		
+		//_delay_ms(4500);
+		if (reed1_flag) {
+			reed1_flag = 0;
+			TCA0.SPLIT.HCMP0 = (0);
+			TCA0.SPLIT.HCMP1 = (0);
+			TCA0.SPLIT.LCMP1 = (0);
+			TCA0.SPLIT.LCMP2 = (0);
+			motorState = NAMAGNEET;
+		}
 		
 		break;
 		

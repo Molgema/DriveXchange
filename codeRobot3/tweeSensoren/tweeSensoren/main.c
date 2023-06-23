@@ -1,3 +1,4 @@
+//robot 3
 #include <atmel_start.h>
 #include <avr/sleep.h>
 #include <util/delay.h>
@@ -281,8 +282,8 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 			TCA0.SPLIT.LCMP2 = 255;
 			
 		}
-		TCA0.SPLIT.LCMP0 = ((270-(IR0 + IR1 + IR2 + IR3)/4));
-		TCA0.SPLIT.LCMP2 = ((270-(IR4 + IR5 + IR6 + IR7)/4));
+		TCA0.SPLIT.LCMP0 = ((IR0 + IR1 + IR2 + IR3)/4)-230;
+		TCA0.SPLIT.LCMP2 = ((IR4 + IR5 + IR6 + IR7)/4)-230;
 		LED0_set_level(0);
 		break;
 		
@@ -319,8 +320,10 @@ void motorControl(uint16_t IR0, uint16_t IR1, uint16_t IR2, uint16_t IR3, uint16
 		
 		case NAMAGNEET:
 		
-		TCA0.SPLIT.LCMP0 = ((260-(IR0 + IR1 + IR2 + IR3)/4));
-		TCA0.SPLIT.LCMP2 = ((260 -(IR4 + IR5 + IR6 + IR7)/4));
+		//TCA0.SPLIT.LCMP0 = ((270-(IR0 + IR1 + IR2 + IR3)/4));
+		//TCA0.SPLIT.LCMP2 = ((270 -(IR4 + IR5 + IR6 + IR7)/4));
+		TCA0.SPLIT.LCMP0 = ((IR0 + IR1 + IR2 + IR3)/4)-230;
+		TCA0.SPLIT.LCMP2 = ((IR4 + IR5 + IR6 + IR7)/4)-230;
 		LED0_set_level(0);
 		
 		timerAS();
